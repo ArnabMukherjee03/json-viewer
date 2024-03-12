@@ -2,6 +2,8 @@
 
 
 export const InputSection = ({handleInput,value,className}) => {
+
+  console.log(value);
  
   return (
     <div className={className}>
