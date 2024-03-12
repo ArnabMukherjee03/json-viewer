@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FaCaretRight,FaCaretDown } from "react-icons/fa";
 
 export const JsonViewer = ({data,className}) => {
+  
     const [collapsedKeys, setCollapsedKeys] = useState([]);
 
     const toggleCollapse = (key) => {
@@ -19,12 +20,10 @@ export const JsonViewer = ({data,className}) => {
 
 
     const renderJson = (json) => {
-        console.log(Object.keys(json));
+
         return Object.keys(json).map((key) => {
           const value = json[key];
-          console.log("value",value);
-
-
+        //   console.log(value);
           const type = Array.isArray(value) ? `[${value.length}]` : typeof value === "object"?`{${Object.keys(value).length}}`: typeof(value);
     
           if (typeof value === 'object' && value !== null) {
@@ -32,7 +31,7 @@ export const JsonViewer = ({data,className}) => {
               <div className="" key={key}>
                 <div className="flex items-center gap-2">
                  {isCollapsed(key)?<FaCaretRight className="cursor-pointer" onClick={() => toggleCollapse(key)}/>:<FaCaretDown className="cursor-pointer" onClick={() => toggleCollapse(key)}/>}
-                 <span>{key} {type}</span>
+                 <span>{key} <span className="text-sm  text-red-500">{type}</span></span>
                 </div>
                 {isCollapsed(key) ? null : <div className="ml-[30px]">{renderJson(value)}</div>}
               </div>
@@ -41,7 +40,7 @@ export const JsonViewer = ({data,className}) => {
     
           return (
             <div key={key} className="ml-5">
-              {key}: {value} {type}
+              {key}: {value} <span className="text-sm  text-red-500">{type}</span>
             </div>
           );
         });
