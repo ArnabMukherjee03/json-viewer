@@ -23,8 +23,9 @@ export const JsonViewer = ({data,className}) => {
 
         return Object.keys(json).map((key) => {
           const value = json[key];
+
         //   console.log(value);
-          const type = Array.isArray(value) ? `[${value.length}]` : typeof value === "object"?`{${Object.keys(value).length}}`: typeof(value);
+          const type = value === null ? "null" : Array.isArray(value) ? `[${value.length}]` : typeof value === "object"?`{${Object.keys(value).length}}`: typeof(value);
     
           if (typeof value === 'object' && value !== null) {
             return (
